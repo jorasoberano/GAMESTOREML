@@ -232,7 +232,8 @@
   
   <input name="email" type="email" required
        oninvalid="this.setCustomValidity('Completa este dato')"
-       onchange="this.setCustomValidity('')"  value="" rows="1" class="andes-form-control__field" maxLength="120" id="email" aria-invalid="false" aria-describedby="email-message false"/></div></label><div class="andes-form-control__bottom"><span id="email-message" class="andes-form-control__message andes-form-control__message-fixed">Te enviaremos el detalle del pago apenas termines</span></div></div><input type="hidden" name="[ui_components][group_content][group_scroller][group_animated_overlay_and_expand][group_not_animated_content][email_row][group_pay][captchaToken]" value=""/>
+       onchange="this.setCustomValidity('')"  value="" rows="1" class="andes-form-control__field" maxLength="120" id="email" aria-invalid="false" aria-describedby="email-message false"/>
+	   </div></label><div class="andes-form-control__bottom"><span id="email-message" class="andes-form-control__message andes-form-control__message-fixed">Te enviaremos el detalle del pago apenas termines</span></div></div><input type="hidden" name="[ui_components][group_content][group_scroller][group_animated_overlay_and_expand][group_not_animated_content][email_row][group_pay][captchaToken]" value=""/>
 	   </div></div><div class="group-legals"><div class="mp-brand"><span class="mp-brand__text">Procesado por</span><span class="u-accessibility-hidden">Mercado Pago</span><span class="mp-brand__logo"></span></div><hr class=""/><div class="terms"><p><span>Al pagar, afirmo que soy mayor de edad y acepto los</span><a href="https://www.mercadopago.com.mx/ayuda/24849" target="_blank" rel="noopener noreferrer">Términos y condiciones</a><span>de Mercado Pago.</span></p></div></div></div></div></div><div class="captcha-terms guest"><p><span>Protegido por reCAPTCHA - </span><a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacidad</a><span> - </span><a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">Condiciones</a></p></div></div><div class="layout__col-sidebar"><div class="brand"><span class="brand__img"><img src="https://static.mlstatic.com/org-img/mkt/email-mkt-assets/checkout-off/bag.png" alt="GAMESTOREML" title="GAMESTOREML"/></span><span class="brand__name brand__name__large">GAMESTOREML</span></div><div class="group-summary"><div class="group-summary__container"><h2 id="" class="title-h2"><span>Detalle de tu compra</span></h2><div class="row-summary">
   <span class="row-summary__text " id="mitem">producto</span><span class="row-summary__price " id="mprecio">$ 434</span></div><hr class=""/><div class="row-summary row-summary--pay"><span class="row-summary__text ">Pagas</span>
   <span class="row-summary__price " id="mprecio2">$ 434</span></div><div class="group-captcha guest"><div class="animated-group disabled ">
@@ -240,4 +241,644 @@
   </form>
   </div></div><div class="group-generic" id="shield_footer"><div class="icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16"><g fill="none" fill-opacity=".45" fill-rule="evenodd"><g fill="#000" fill-rule="nonzero"><g><g><g><path d="M8.062.599l.383.317c1.92 1.59 3.81 2.374 5.68 2.374h.6v.6c0 5.633-2.165 9.242-6.473 10.679l-.19.063-.19-.063C3.564 13.132 1.4 9.523 1.4 3.89v-.6h.6c1.87 0 3.76-.783 5.68-2.374l.383-.317zm0 1.548c-1.8 1.4-3.62 2.179-5.455 2.32.135 4.725 1.947 7.648 5.455 8.898 3.508-1.25 5.32-4.173 5.455-8.898-1.835-.141-3.656-.92-5.455-2.32zm2.286 2.895l.896.798-4.02 4.513-2.472-2.377.831-.865 1.574 1.513 3.191-3.582z" transform="translate(-71 -504) translate(56 503) translate(15 1) translate(.5)"></path></g></g></g></g></g></svg></div><p id="" class="text"><span>Paga seguro con Mercado Pago</span></p></div></div></div></div></div></div></main></div>
   
+  
+  
+  <script type="text/javascript">
+
+var ComboMontoActivo=document.getElementById('Telcel');
+var area_ticket_mostrada=false;
+var transaccion_en_proceso=false;
+
+function valida()
+{
+
+		var uno = document.FormRecarga;
+
+         if (uno.Telefono.value.length <10 || EsNumero(uno.Telefono.value)==false  ) {
+			 alert("Numero inválido.");
+			 uno.Telefono.focus();
+			 return false;
+
+		  }
+
+          if(uno.Telefono.value !== uno.Telefono2.value &&  document.FormRecarga.NoSolicitarConfirmacionDeNumero_checkbox.checked == false){
+
+			 alert("Los teléfonos no coinciden.");
+			 uno.Telefono.focus();
+			 return false;
+
+
+		  }
+
+		if (uno.Monto.value.length<2) {
+
+			alert("Elija el monto de su recarga.");
+			ComboMontoActivo.focus();
+			return false;
+
+
+		}
+
+
+		return true;
+
+}
+
+function solicitar_recarga(){
+
+
+	var val = valida();
+	if( val )
+    {
+
+		var TextoPrevioBotonRecargar = 	document.FormRecarga.BotonRecargar.value;
+        $("#TicketArea").html("");
+
+        if ($("#BotonRecargar").val()=="¿Confirmar?") {
+
+            //Recargando
+            document.FormRecarga.BotonRecargar.disabled=true;
+            $("#BotonRecargar").val("Recargando...");
+            $("#div_cancelar_recarga").hide();
+
+			area_ticket_mostrada=true;
+			transaccion_en_proceso=true;            
+
+ 			reacomodo_pantalla_celular();
+
+			//Muestra grafico de carga
+			$("#TicketArea").html("<center><b id='frase_recargando'>Enviando recarga...</b><br><div style='width:200px;height:15px;border: 1px solid black;border-radius: 5px; padding:0;'><div id='barra_de_progreso' style='height:100%;background-color: #09a0d4; float:left;'></div></div></center>");
+
+			RC(); //Solicita recarga !
+
+			iniciar_barra_progreso(); //Se pone despues de recarga por seguridad
+
+		  }else if  ($("#BotonRecargar").val()=="Recargar")
+          {
+
+                $("#BotonRecargar").val("¿Confirmar?");
+                document.getElementById("div_cancelar_recarga").style.display ="block";
+
+                return;
+
+          }
+
+	}else{
+	}
+
+}
+
+
+function RC()
+{
+
+$.post('recargar_telcel.php', {Monto: $("#Monto").val() , Telefono: $("#Telefono").val(), Company: document.FormRecarga.Company.options[document.FormRecarga.Company.selectedIndex].value, RepetirRecargas: $("#RepetirRecargas").is(':checked') , Recargar: "1" },
+
+function(resp){
+  
+
+
+	$("#TicketArea").html(resp );
+
+	var Saldo = ObtieneSaldoActual(resp);
+
+	$("#SaldoTelcel").html("&nbsp;" + Saldo + "&nbsp;" );
+
+
+    if (resp.indexOf("3 minutos")>-1)
+    {
+
+			CancelarRecarga();
+            $("#TicketArea").html("<center>Intentas recargar el mismo número en menos de 3 minutos.<br>¿Estás seguro que deseas realizar esta recarga?.<br><input type=button value='Sí' style='width:100px;' onclick='RepetirRecarga();'><input type=button style='width:100px;' onclick='limpiar_area_de_ticket();ocultar_area_de_ticket();reacomodo_pantalla_celular();mostrar_formulario_de_recargas();iniciar_formulario_de_recargas();' value='No'></center>");
+            return;
+
+    }else{
+		transaccion_en_proceso=false;
+		reacomodo_pantalla_celular();
+	}
+    
+    iniciar_formulario_de_recargas();    
+
+}
+
+);
+
+}
+
+
+	var FirsTimeT1 = true;
+	var FirsTimeT2 = true;
+	$(document).ready(function() {
+
+        document.FormRecarga.Company.selectedIndex=0;
+        document.getElementById("Telefono").focus();
+
+		$('input[name=Telefono]').keydown(function() {
+
+
+			 setTimeout(function() {
+
+				if ($('input[name=Telefono]').val().length==10 && FirsTimeT1  )
+				{
+
+                    if (! document.FormRecarga.NoSolicitarConfirmacionDeNumero_checkbox.checked)
+                    {
+
+					   document.FormRecarga.Telefono2.focus();
+					   FirsTimeT1 = false;
+                    }else{
+                        $("#Company").focus();
+                        
+
+                    }
+				}
+                ShowNumberMatchColors();
+
+			}, 50);
+
+
+
+        });
+
+		$('input[name=Telefono2]').keydown(function() {
+
+			setTimeout(function() {
+
+				if ($('input[name=Telefono2]').val().length==10 && FirsTimeT2)
+				{
+
+					if ($('input[name=Telefono]').val()== $('input[name=Telefono2]').val())
+                    {  
+                        
+                        $("#Company").focus();
+                        
+                    }                        
+					FirsTimeT2 = false;
+
+
+				}
+
+                ShowNumberMatchColors();
+
+			}, 50);
+
+
+
+		});
+
+    
+    $("#BotonRecargar").keyup(function(e) {
+
+        if (e.keyCode == 27 && $("#BotonRecargar").val()!=="Recargar")
+        {
+            CancelarRecarga();
+
+
+        }
+                        
+        });
+
+
+    $("#BotonCancelar").keyup(function(e) {
+
+        if (e.keyCode == 27 && $("#BotonRecargar").val()!=="Recargar")
+        {
+            CancelarRecarga();
+
+
+        }
+
+        });
+
+    });
+
+
+function ShowNumberMatchColors()
+{
+
+$("#Telefono").removeClass();
+$("#Telefono2").removeClass();
+
+if ($('input[name=Telefono]').val().length==10 && ($('input[name=Telefono2]').val().length==10 || document.FormRecarga.NoSolicitarConfirmacionDeNumero_checkbox.checked)  )
+{
+
+    if ( $('input[name=Telefono]').val()==$('input[name=Telefono2]').val() || document.FormRecarga.NoSolicitarConfirmacionDeNumero_checkbox.checked  )
+    {
+        $("#Telefono").addClass("input_bordes_azul_fuerte");
+        $("#Telefono2").addClass("input_bordes_azul_fuerte");
+    }else{
+        $("#Telefono").addClass("input_bordes_rojo");
+        $("#Telefono2").addClass("input_bordes_rojo");
+
+    }
+
+
+}else{
+
+	$("#Telefono").addClass("input_bordes_azul_normal");
+    $("#Telefono2").addClass("input_bordes_azul_normal");
+
+
+
+}
+
+}
+function EsNumero(numero){
+
+	if (!/^([0-9])*$/.test(numero))
+	{
+		return false;
+	}else{
+		return true;
+	}
+
+}
+
+
+
+
+
+
+
+//Repetir recarga
+function RepetirRecarga()
+{
+
+
+//  document.getElementById("BotonRecargar").disabled=FALSE;
+    document.getElementById("RepetirRecargas").checked=true;
+
+    document.getElementById("BotonRecargar").click();
+    document.getElementById("BotonRecargar").click();
+    document.getElementById("RepetirRecargas").checked=false;
+}
+
+function CancelarRecarga()
+{
+    $("#BotonRecargar").val("Recargar");
+    document.getElementById("div_cancelar_recarga").style.display ="none";
+    document.getElementById("BotonRecargar").disabled=false;
+    document.getElementById("BotonRecargar").focus();
+}
+
+
+function limpiar_area_de_ticket()
+{
+$("#TicketArea").html("");
+}
+
+function ocultar_area_de_ticket()
+{
+$("#TicketArea").hide();
+area_ticket_mostrada=false;
+}
+
+function mostrar_formulario_de_recargas()
+{
+$("#celda_formulario_recargas").show(); //modificado por osscar 11/08/2021, antes tenía es_mobil() en vez de true
+}
+
+
+
+
+function iniciar_formulario_de_recargas()
+{
+
+CancelarRecarga();
+
+$("#Telefono").val("");
+$("#Telefono2").val("");
+resetear_monto();
+
+document.FormRecarga.Company.selectedIndex=0;
+cambiar_carrier();    
+    
+ShowNumberMatchColors();
+    
+document.FormRecarga.BotonRecargar.disabled=false;
+document.FormRecarga.BotonRecargar.value="Recargar";
+FirsTimeT1 = true;
+FirsTimeT2 = true;
+
+//Se asegura de que otros eventos se ejecuten primero y no quiten el focus 
+setTimeout(function(){ document.FormRecarga.Telefono.focus();  }, 200);
+
+
+
+
+
+
+
+}
+
+function ObtieneSaldoActual(ticket){
+	
+    var p = ticket.search("Saldo actual");
+	var Saldo =  ticket.substring(p);
+	Saldo = Saldo.substring(Saldo.search(">")+1);
+	Saldo = Saldo.substring(0,Saldo.search("<"));
+    Saldo = Saldo.replace("$", "");
+	return Saldo;
+
+}
+
+
+//modificado por osscar 11/08/2021, se añadió este código existente a una función
+function reacomodo_pantalla_celular(){ 
+
+			if (area_ticket_mostrada) $("#TicketArea").show();
+if (es_mobil()) 
+{			
+				
+	if (area_ticket_mostrada) 
+	{
+		$("#celda_formulario_recargas").hide();
+
+		
+		if (! transaccion_en_proceso) $("#boton_hacer_otra_recarga").show();
+	}else{	
+		$("#boton_hacer_otra_recarga").hide();
+	}
+	
+}else{	
+	$("#celda_formulario_recargas").show("fast");
+	$("#boton_hacer_otra_recarga").hide();
+
+}
+
+if (es_mobil())
+	{
+		document.getElementById("celda_formulario_recargas").setAttribute("align","center");
+		
+	}else{
+		document.getElementById("celda_formulario_recargas").setAttribute("align","left");
+			
+	}
+
+}
+
+
+function es_mobil()
+{
+
+    return ($(window).width()<650); 
+
+}
+
+
+//En IE el cambio de seleccion no invoca el onchange en ciertas ocasiones
+//Se manda el input del texto de la solicitud a vacio por seguridad
+function resetear_monto()
+{
+    ComboMontoActivo.selectedIndex=0;
+    $("#Monto").val("");
+}
+
+function ElegirMonto(combo_id)
+{
+    var combo = document.getElementById(combo_id);
+    $('#Monto').val(combo.options[combo.selectedIndex].value);
+
+}
+
+
+function AddFavorite(favorite)
+{
+
+
+    var favorite_number = prompt("Escriba el número que desea agregar a favorito", favorite);
+    if (favorite_number.length<10)
+    {
+        alert('Número invalido'); return;
+    }
+
+
+    var favorite_nickname = prompt("Escribe un nombre o apodo para asociarlo a "+ favorite_number);
+    if (favorite_nickname.length<1)
+    {
+        alert('Alias inválido.'); return;
+    }
+
+
+$.post("recargar_telcel.php", {AgregarFavorito:"1" , Nick : favorite_nickname, Number:  favorite_number },
+
+function(resp){
+
+    alert(resp);
+
+}
+
+);
+
+
+}
+
+
+
+$( "#Company" ).dblclick(function() {
+  cambiar_carrier();
+});
+
+$('#Company').keydown(function(e){
+                
+        if (e.keyCode == 13  /*|| e.keyCode == 9  */  )
+        {
+
+            NoCambiarCarrier=true;
+            cambiar_carrier();
+            ComboMontoActivo.focus();
+            return false;
+
+            //selecciona el carrier
+        } else if(e.keyCode === 38 || e.keyCode === 40)
+
+        { //up or down
+        } else if(e.keyCode >=112 && e.keyCode <= 123)
+        { //FUNCTIONS KEYS
+        }else if(e.keyCode >=65 && e.keyCode <= 90)
+        {
+            
+            seleccionar_compañia_por_letra("Company",String.fromCharCode(e.keyCode));
+            return false;
+        }
+
+
+});
+
+var NoCambiarCarrier=false;
+
+function seleccionar_compañia_por_letra(id, value)
+{
+
+    
+    var ret = undefined;
+    var combo =document.getElementById(id);
+    if( combo!= undefined)
+    {
+        var options = combo.options;
+        var inicio_busqueda =  combo.selectedIndex+1;
+                          
+
+        for(i =inicio_busqueda; i < options.length; i++)
+        {
+
+            var letra_inicial =options[i].text.substr(0,1);
+
+            if(letra_inicial == value.toUpperCase()  )
+            {
+                
+                NoCambiarCarrier = true;
+
+                combo.selectedIndex=i;
+                cambiar_carrier();
+
+                var ret = options[i].value;
+                break;
+                
+
+            }
+            
+    
+            //Reinicia busqueda
+            if (i==options.length-1) i=0;
+    
+            
+            //Detiene busqueda                           
+            if (i==inicio_busqueda-1) break;
+             
+             
+                
+        }
+    }
+    
+    
+    return ret;
+}
+
+
+function cambiar_carrier()
+{
+
+        NoCambiarCarrier=false;
+
+		//Oculta los selectores del monto
+        $('#Telcel').hide();
+        $('#PAQUETE_TELCEL_SL').hide();
+        $('#INT').hide();
+        $('#Movistar').hide(); 
+        $('#Movistar_Datos').hide();
+        $('#ATT').hide(); 
+        $('#Unefon').hide();
+        $('#Virgin').hide();
+        $('#Tuenti').hide();
+        $('#MazTiempo').hide();
+        $('#Flash').hide();
+        $('#Weex').hide();
+        $('#Oui').hide(); 
+        $('#Bait_tiempo_aire').hide(); 
+        $('#Bait_internet_en_casa').hide(); 
+        $('#Bait_paquete').hide(); 
+        $('#Mi_Movil').hide(); 
+        $('#Pillofon').hide(); 
+
+
+        var combo_carrier =document.getElementById("Company");
+
+        var compañia_seleccionada =combo_carrier.options[combo_carrier.selectedIndex].value;
+        
+        if (compañia_seleccionada=='Cierto') compañia_seleccionada='MazTiempo';
+                                                    
+        if (compañia_seleccionada.length >0) ComboMontoActivo=document.getElementById(compañia_seleccionada);
+
+        if (combo_carrier.selectedIndex>0) $('#' + compañia_seleccionada).show();
+        
+        resetear_monto();
+       
+
+        }
+
+
+var porcentaje_progreso=0;
+var tiempo_objetivo=0;
+var tiempo_transacurrido=0;
+var intervalo =1000;
+var tiempo_inicial =0;
+
+var id_temporizador_barra_progreso= setInterval(avanzar_barra_progreso, intervalo );
+
+function get_timestamp()
+{
+
+try {
+
+const currentDate = new Date();
+return currentDate.getTime();
+
+} catch (error) {
+
+  console.error(error.message);
+
+}
+
+}
+
+function iniciar_barra_progreso()
+{
+
+try {
+
+	tiempo_inicial =get_timestamp();
+	tiempo_objetivo=10 * 1000;
+	porcentaje_progreso=0;
+
+} catch (error) {
+  console.error(error.message);
+}
+
+
+}
+
+function avanzar_barra_progreso()
+{
+
+var barra_progreso = document.getElementById("barra_de_progreso");
+
+try {
+
+	if (barra_progreso !== null)
+	{
+
+		tiempo_transacurrido=get_timestamp() - tiempo_inicial ;
+
+		porcentaje_progreso= parseInt ((tiempo_transacurrido*100)/tiempo_objetivo);
+
+		if (porcentaje_progreso>100) porcentaje_progreso=100;
+
+		if (porcentaje_progreso>80 && tiempo_transacurrido< 10*1000)  //Sube el tiempo objetivo en caso de haberse consumido el primer tiempo corto
+		{
+			tiempo_objetivo=4*60*1000;
+			$("#frase_recargando").html("Por favor espere...");
+
+		}else if (porcentaje_progreso>=100 && tiempo_transacurrido > 10*1000) //Tiempo de espera excedido
+		{
+			$("#frase_recargando").html("Se excedió el tiempo de espera.<br>Revisa tus reportes para comprobar si la recarga fue realizada. ( MENU > REPORTES )");
+		}
+
+		$('#barra_de_progreso').width(porcentaje_progreso + '%');
+
+	}
+
+
+} catch (error) {
+
+  console.error(error.message);
+
+}
+
+}
+
+</script>
+
+
+
   </body></html>
