@@ -473,4 +473,4 @@ Allow: /*mercado
 # siteId -> MLM
 
 # Sitemap files
-Sitemap: https://www.gamestoremercadoshopscom.ml/sitemap.xml
+Sitemap: https://www.gamestoreml.store/sitemap.xml
